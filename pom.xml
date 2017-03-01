@@ -54,7 +54,7 @@
           <generatePackage>hello.wsdl</generatePackage>
           <schemas>
             <schema>
-              <url>http://www.webservicex.com/stockquote.asmx?WSDL</url>
+              <url>http://meebhoomi.ap.gov.in/UtilityWebService.asmx?WSDL</url>
             </schema>
           </schemas>
         </configuration>
