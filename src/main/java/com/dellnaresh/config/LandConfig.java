@@ -20,11 +20,13 @@ public class LandConfig {
     }
 
     @Bean
-    public LandDetailsClient quoteClient(Jaxb2Marshaller marshaller) {
+    public LandDetailsClient landClient(Jaxb2Marshaller marshaller) {
         LandDetailsClient client = new LandDetailsClient();
         client.setDefaultUri(LandDetailsClient.URI);
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;
     }
+
+
 }

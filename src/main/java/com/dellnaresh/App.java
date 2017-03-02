@@ -4,6 +4,7 @@ import com.dellnaresh.wsdl.GetDistrictsResponse;
 import com.dellnaresh.wsdl.GetMandalsResponse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -13,24 +14,11 @@ import org.springframework.context.annotation.Bean;
  *
  */
 @SpringBootApplication
-public class App 
+public class App
 {
     public static void main(String[] args) {
-        SpringApplication.run(App.class);
+        SpringApplication.run(App.class, args);
     }
 
-    @Bean
-    CommandLineRunner lookup(LandDetailsClient quoteClient) {
-        return args -> {
-            String ticker = "MSFT";
 
-            if (args.length > 0) {
-                ticker = args[0];
-            }
-            GetMandalsResponse response = quoteClient.getMandals("2");
-            response.getGetMandalsResult().getCascadingDropDownNameValue().stream().forEach(System.out::println);
-
-
-        };
-    }
 }

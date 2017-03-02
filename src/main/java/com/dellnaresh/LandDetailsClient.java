@@ -14,11 +14,10 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
  * Created by nmiriyal on 1/03/2017.
  */
 @Component
-public class LandDetailsClient extends WebServiceGatewaySupport implements LandClient {
+public class LandDetailsClient extends WebServiceGatewaySupport {
     private static final Logger log = LoggerFactory.getLogger(LandDetailsClient.class);
     public static final String URI = "http://meebhoomi.ap.gov.in/UtilityWebService.asmx";
 
-    @Override
     public GetDistrictsResponse getDistricts() {
         GetDistricts request = new GetDistricts();
         GetDistrictsResponse response = (GetDistrictsResponse) callWebservice(request, "districts");
@@ -38,7 +37,6 @@ public class LandDetailsClient extends WebServiceGatewaySupport implements LandC
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
-    @Override
     public GetMandalsResponse getMandals(String district) {
         GetMandals request = new GetMandals();
         request.setKnownCategoryValues("District:" + district);
