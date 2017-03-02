@@ -1,6 +1,7 @@
 package com.dellnaresh;
 
 import com.dellnaresh.wsdl.GetDistrictsResponse;
+import com.dellnaresh.wsdl.GetMandalsResponse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * Hello world!
+ *
  *
  */
 @SpringBootApplication
@@ -25,8 +27,10 @@ public class App
             if (args.length > 0) {
                 ticker = args[0];
             }
-            GetDistrictsResponse response = quoteClient.getDistricts();
-            System.err.println(response.getGetDistrictsResult());
+            GetMandalsResponse response = quoteClient.getMandals("2");
+            response.getGetMandalsResult().getCascadingDropDownNameValue().stream().forEach(System.out::println);
+
+
         };
     }
 }
