@@ -52,4 +52,18 @@ public class LandDetailsClient extends WebServiceGatewaySupport {
         return response;
     }
 
+    public GetPattadarListResponse getPattadhars(String village){
+        GetPattadarList request=new GetPattadarList();
+        request.setVillagecode(village);
+        GetPattadarListResponse response = (GetPattadarListResponse) callWebservice(request, "pattadarList");
+        return response;
+    }
+    public GetPattadarNamesResponse getPattadharNames(String dist,String mand,String village){
+        GetPattadarNames request=new GetPattadarNames();
+        request.setDistCode(dist);
+        request.setMandCode(mand);
+        request.setVillageCode(village);
+        GetPattadarNamesResponse response = (GetPattadarNamesResponse) callWebservice(request, "pattadarNames");
+        return response;
+    }
 }
