@@ -1,9 +1,6 @@
 package com.dellnaresh;
 
-import com.dellnaresh.wsdl.GetDistricts;
-import com.dellnaresh.wsdl.GetDistrictsResponse;
-import com.dellnaresh.wsdl.GetMandals;
-import com.dellnaresh.wsdl.GetMandalsResponse;
+import com.dellnaresh.wsdl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -43,6 +40,15 @@ public class LandDetailsClient extends WebServiceGatewaySupport {
         request.setCategory("Mandal");
 
         GetMandalsResponse response = (GetMandalsResponse) callWebservice(request, "mandals");
+        return response;
+    }
+
+    public GetVillagesResponse getVillages(String district, String mandal) {
+        GetVillages request = new GetVillages();
+        request.setKnownCategoryValues("District:" + district + ";Mandal:" + mandal);
+        request.setCategory("Mandal");
+
+        GetVillagesResponse response = (GetVillagesResponse) callWebservice(request, "villages");
         return response;
     }
 

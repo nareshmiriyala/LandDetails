@@ -3,11 +3,16 @@ package com.dellnaresh;
 import com.dellnaresh.wsdl.CascadingDropDownNameValue;
 import com.dellnaresh.wsdl.GetDistrictsResponse;
 import com.dellnaresh.wsdl.GetMandalsResponse;
+import com.dellnaresh.wsdl.GetVillagesResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -37,10 +42,29 @@ public class LandDetailsClientTest  {
 
 
     }
+    @Test
+    public void testGetVillages() throws Exception {
+        GetDistrictsResponse getDistrictsResponse = getGetDistrictsResponse();
+        Map<String,String> vilMap=new HashMap<>();
+        getDistrictsResponse.getGetDistrictsResult().getCascadingDropDownNameValue().stream().forEach(dis->{
+                getMandals(dis).stream().forEach(man->getVillages(man.getValue(),dis.getValue(),vilMap));
+        });
 
-    private void getMandals(CascadingDropDownNameValue dis) {
+        System.out.println("Total villages "+vilMap.size());
+
+
+    }
+
+    private void getVillages(String man,String dis,Map<String,String> villMap) {
+        GetVillagesResponse villages = landClient.getVillages(dis, man);
+        assertNotNull(villages);
+        villages.getGetVillagesResult().getCascadingDropDownNameValue().stream().forEach(vil->villMap.put(vil.getName(),vil.getName()));
+    }
+
+    private List<CascadingDropDownNameValue> getMandals(CascadingDropDownNameValue dis) {
         GetMandalsResponse mandalsResponse=landClient.getMandals( dis.getValue());
         assertNotNull(mandalsResponse);
+        return mandalsResponse.getGetMandalsResult().getCascadingDropDownNameValue();
 
     }
 }
